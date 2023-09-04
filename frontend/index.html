@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="taskApp">
+<head>
+  <meta charset="utf-8">
+  <title>Task List App</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+  <style>
+    .completed-task {
+      text-decoration: line-through;
+    }
+  </style>  
+</head>
+<body>
+  <div ng-controller="TaskController">
+    <h1>Task List</h1>
+    <ul>
+      <li ng-repeat="task in tasks">
+        <input type="checkbox" ng-model="task.done" />
+        <span ng-class="{'completed-task': task.completed}">{{ task.description }}</span>
+      </li>
+    </ul>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
