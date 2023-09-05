@@ -1,0 +1,8 @@
+{
+  "realm": "HomeWork",
+  "auth-server-url": "http://localhost:8088/auth",
+  "ssl-required": "external",
+  "resource": "test-app",
+  "public-client": true,
+  "confidential-port": 0
+}

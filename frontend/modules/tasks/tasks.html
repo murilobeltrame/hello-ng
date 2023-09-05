@@ -1,0 +1,9 @@
+<div ng-controller="TaskController">
+    <h2>Task List</h2>
+    <ul>
+      <li ng-repeat="task in tasks">
+        <input type="checkbox" ng-model="task.done" />
+        <span ng-class="{'completed-task': task.completed}">{{ task.description }}</span>
+      </li>
+    </ul>
+  </div>

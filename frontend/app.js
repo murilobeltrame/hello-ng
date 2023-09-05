@@ -1,19 +1,26 @@
 angular
-  .module("taskApp", [])
-  .controller("TaskController", function ($scope, $http) {
-    $scope.tasks = [];
+    .module('taskApp', ['ngRoute', 'app.readme', 'app.about', 'app.tasks'])
+    .run(function($rootScope, $location, $window) {
+        var kc = new Keycloak('keycloak.json');
+        kc.init({onLoad: 'login-required'})
+            .then(function(authenticated){
+                if (authenticated) {
+                    $rootScope.authenticated = true;
+                    $rootScope.username = kc.tokenParsed.preferred_username;
+                } else {
+                    $rootScope.authenticated = false;
+                    $window.$location.href = '/login'
+                }
+            })
+            .catch(function (e) {
+                console.error('Falha ao inicializar o KC', e);
+            })
 
-    $http({
-      method: "GET",
-      url: "http://localhost:8080/api/tasks",
-      headers: {
-        "Access-Control-Allow-Origin": "http://localhost:5500",
-      },
     })
-      .then(function (response) {
-        $scope.tasks = response.data;
-      })
-      .catch(function (error) {
-        console.error("Error fetching tasks:", error);
-      });
-  });
+    .config(function($routeProvider) {
+        $routeProvider
+            .when('/', { template: '<readme />' })
+            .when('/about', { template: '<about />' })
+            .when('/tasks', { template: '<tasks />' })
+            .otherwise({ redirectTo: '/' })
+    });

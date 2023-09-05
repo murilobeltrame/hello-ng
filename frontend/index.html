@@ -3,24 +3,32 @@
 <head>
   <meta charset="utf-8">
   <title>Task List App</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.2/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.8.3/angular.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-route/1.8.3/angular-route.min.js"></script>
+  <script src="node_modules/keycloak-js/dist/keycloak.min.js"></script>
   <style>
     .completed-task {
       text-decoration: line-through;
     }
   </style>  
+  <base href="http://127.0.0.1:5500/frontend/">
 </head>
 <body>
-  <div ng-controller="TaskController">
-    <h1>Task List</h1>
+  <h1>The AngularJs App</h1>
+  <nav>
     <ul>
-      <li ng-repeat="task in tasks">
-        <input type="checkbox" ng-model="task.done" />
-        <span ng-class="{'completed-task': task.completed}">{{ task.description }}</span>
-      </li>
+      <li><a href="#!/readme">Readme</a></li>
+      <li><a href="#!/tasks">Task List</a></li>
+      <li><a href="#!/about">About</a></li>
     </ul>
-  </div>
+  </nav>
+  <hr />
 
+  <div ng-view></div>
+  
+  <script src="modules/about/about.js"></script>
+  <script src="modules/readme/readme.js"></script>
+  <script src="modules/tasks/tasks.js"></script>
   <script src="app.js"></script>
 </body>
 </html>
